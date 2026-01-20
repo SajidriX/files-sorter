@@ -70,13 +70,14 @@ def original_sort_files(path: pathlib.Path):
                 # Moving file
                 try:
                     shutil.move(str(file), str(folder / file.name))
-                    update_text(f"✅ Moved: {file.name} → {folder_name}/")
-                    moved_count += 1
+                    if str(file.suffix) != ".py" or str(file.suffix) != ".gitignore" or str(file.suffix) != ".vscode":
+                        update_text(f"✅ Moved: {file.name} → {folder_name}/")
+                        moved_count += 1
                 except Exception as e:
                     update_text(f"❌ Error with {file.name}: {e}")
                     error_count += 1
     
-    # Итог
+    #Bottom line
     update_text("\n" + "="*40)
     update_text(f"📊 Results: {moved_count} moved, {error_count} errors")
 
